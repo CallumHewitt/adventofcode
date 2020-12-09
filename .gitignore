@@ -3,3 +3,4 @@ settings.json
 
 # Python
 *.pyc
+__pycache__/
