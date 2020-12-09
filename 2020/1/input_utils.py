@@ -24,6 +24,14 @@ def get_input_as_list(input_id: int):
 def read_file_as_list(file_name: str):
     return open(file_name, 'r').readlines()
 
+def get_input_as_ints(input_id: int):
+    file_name = get_input_file_name(input_id)
+    print('Getting input as ints from ' + file_name)
+    return convert_strings_to_ints(read_file_as_list(file_name))
+
+def convert_strings_to_ints(strings: Iterable[str]):
+    return list(map(int, strings))
+
 def get_input_as_csv_lists(input_id: int):
     file_name = get_input_file_name(input_id)
     print('Getting input as list of csv from ' + file_name)
@@ -51,5 +59,3 @@ def get_sample_as_csv_lists(sample_id: int):
 def split_csv(csv: str):
     return list(map(str.strip, csv.split(',')))
 
-def convert_strings_to_ints(strings: Iterable[str]):
-    return list(map(int, strings))
