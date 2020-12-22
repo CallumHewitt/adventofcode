@@ -1,4 +1,7 @@
+from os import P_NOWAITO
 from input_utils import *
+from functools import reduce
+
 import re
 
 ON = '.'
@@ -9,19 +12,21 @@ def solve_1(data):
     borders_by_id = dict(map(lambda item: (item[0], get_borders(item[1])), tiles_by_id.items()))
     borders_by_id_with_flips = add_flips(borders_by_id)
     encoded_borders_by_id = encode_all_borders(borders_by_id_with_flips)
-    print(count_matching_borders(encoded_borders_by_id))
+    border_counts = count_matching_borders(encoded_borders_by_id)
+    potential_corners = find_potential_corners(border_counts)
+    return reduce(lambda a, b: a*b, map(int, potential_corners), 1)
 
 def parse_input(tile_input):
     search = re.search("Tile (\d*):\n(.*)", tile_input, re.DOTALL)
     return (search.group(1), search.group(2).split("\n"))
 
 def get_borders(tile):
-    # top, bottom, left, right
+    # top, bottom, left, right, top flipped, bottom flipped, left flipped, right flipped
     borders = (
        tile[0],
        tile[-1],
        ''.join([row[0] for row in tile]),
-       ''.join([row[1] for row in tile]),
+       ''.join([row[-1] for row in tile])
     )
     return borders
 
@@ -53,6 +58,14 @@ def count_matching_borders(borders_by_id):
                         counts_by_id[id][border] += 1
     return counts_by_id
 
+def find_potential_corners(border_counts):
+    corners = set()
+    for id, border_count in border_counts.items():
+        potential_corner = sum(1 for i in border_count.values() if i > 0) == 2
+        if (potential_corner):
+            corners.add(id[:-1])
+        print(f"{id}: {border_count} {'*' if potential_corner else ''}")
+    return corners
 
 
 print('Part 1')
