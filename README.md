@@ -2,7 +2,7 @@
 
 | Puzzles                          | Solutions     | ⭐  |
 |----------------------------------|---------------|----|
-| <https://adventofcode.com/2023/> | [2023](2023/) | 18 |
+| <https://adventofcode.com/2023/> | [2023](2023/) | 21 |
 | <https://adventofcode.com/2022/> | [2022](2022/) | 12 |
 | <https://adventofcode.com/2021/> | [2021](2021/) | 8  |
 | <https://adventofcode.com/2020/> | [2020](2020/) | 48 |
